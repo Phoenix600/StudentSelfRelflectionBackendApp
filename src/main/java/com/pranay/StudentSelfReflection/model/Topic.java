@@ -1,17 +1,15 @@
 package com.pranay.StudentSelfReflection.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.pranay.StudentSelfReflection.constants.TopicStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * File Name: Course.java
- * Entity: Course
+ * File Name: Topic.java
+ * Entity: Topic
  * Package: com.pranay.StudentSelfReflection.model
  * Author: pranayramteke
  * Date: 29/04/25
@@ -23,13 +21,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Course extends BaseEntity
+public class Topic extends BaseEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long courseId;
-	private String courseName;
-	private String description;
-	private Integer durationInMonths;
+	private Long topicId;
 	
+	private String title;
+	private String description;
+	
+	@Enumerated(EnumType.STRING)
+	private TopicStatus eTopicStatus;
 }
