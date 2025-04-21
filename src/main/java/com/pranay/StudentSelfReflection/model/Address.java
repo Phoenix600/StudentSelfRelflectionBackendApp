@@ -9,27 +9,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * File Name: Course.java
- * Entity: Course
- * Package: com.pranay.StudentSelfReflection.model
- * Author: pranayramteke
- * Date: 29/04/25
- * Description:
- */
-
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-public class Course extends BaseEntity
+public class Address extends BaseEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long courseId;
-	private String courseName;
-	private String description;
-	private Integer durationInMonths;
+	private Long addressId;
+	private String street;
+	private String city;
+	private String state;
+	private String postalCode;
 	
 }
