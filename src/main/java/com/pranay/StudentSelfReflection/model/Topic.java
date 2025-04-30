@@ -32,4 +32,11 @@ public class Topic extends BaseEntity
 	
 	@Enumerated(EnumType.STRING)
 	private TopicStatus eTopicStatus;
+	
+	@ManyToOne
+	@JoinColumn(
+		name = "course_id",
+		referencedColumnName = "courseId"
+	)
+	private Course course;
 }

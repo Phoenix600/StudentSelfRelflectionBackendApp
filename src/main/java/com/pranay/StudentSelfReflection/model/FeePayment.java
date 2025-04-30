@@ -55,4 +55,8 @@ public class FeePayment extends BaseEntity
 	
 	private String remarks;
 	
+	@ManyToOne
+	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
+	private StudentUser studentUser;
+	
 }

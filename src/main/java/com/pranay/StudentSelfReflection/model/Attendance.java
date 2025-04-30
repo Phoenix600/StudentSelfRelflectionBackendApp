@@ -1,8 +1,7 @@
 package com.pranay.StudentSelfReflection.model;
 
 import com.pranay.StudentSelfReflection.constants.AttendanceStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -15,11 +14,18 @@ import java.time.LocalDate;
  * Description:
  */
 
+@Entity
 public class Attendance extends BaseEntity
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long attendanceId;
 	private LocalDate date;
 	
 	@Enumerated(EnumType.STRING)
-	private String status;
+	private AttendanceStatus status;
 	
+	@ManyToOne
+	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
+	private StudentUser studentUser;
 }
