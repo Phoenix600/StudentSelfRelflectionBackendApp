@@ -1,13 +1,12 @@
 package com.pranay.StudentSelfReflection.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 /**
  * File Name: Course.java
@@ -32,4 +31,24 @@ public class Course extends BaseEntity
 	private String description;
 	private Integer durationInMonths;
 	
+	@ManyToMany
+	@JoinTable(
+			name = "course_student",
+			joinColumns = @JoinColumn(
+					name = "course_id",
+					referencedColumnName = "courseId"
+			),
+			inverseJoinColumns = @JoinColumn(
+					name = "student_id",
+					referencedColumnName = "studentId"
+			)
+	)
+	private Set<StudentUser> studentUsers;
+	
+	@OneToMany(mappedBy = "course")
+	private Set<Topic> topics;
+	
+	@ManyToOne
+	@JoinColumn(name = "teacher_id", referencedColumnName = "teacherId")
+	private Teacher teacher;
 }

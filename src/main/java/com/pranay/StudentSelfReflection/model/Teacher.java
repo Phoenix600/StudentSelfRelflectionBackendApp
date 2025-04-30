@@ -1,15 +1,14 @@
 package com.pranay.StudentSelfReflection.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 /**
  * File Name: Teacher.java
@@ -37,4 +36,7 @@ public class Teacher extends Users
 	private String email;
 	private String mobile;
 	private LocalDate dob;
+	
+	@OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER , cascade = CascadeType.PERSIST )
+	Set<Course> courses;
 }
