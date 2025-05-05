@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,24 +32,15 @@ public class Course extends BaseEntity
 	private String description;
 	private Integer durationInMonths;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "course_student",
-			joinColumns = @JoinColumn(
-					name = "course_id",
-					referencedColumnName = "courseId"
-			),
-			inverseJoinColumns = @JoinColumn(
-					name = "student_id",
-					referencedColumnName = "studentId"
-			)
-	)
-	private Set<StudentUser> studentUsers;
+	// One Course Can Have Many Topics
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Set<Topic> topics = new HashSet<>();
 	
-	@OneToMany(mappedBy = "course")
-	private Set<Topic> topics;
+	// Many Students Can Belong To Mny Courses
+	@ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	private Set<StudentUser> studentUsers = new HashSet<>();
 	
-	@ManyToOne
-	@JoinColumn(name = "teacher_id", referencedColumnName = "teacherId")
-	private Teacher teacher;
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	private Set<Teacher> teachers = new HashSet<>();
+
 }

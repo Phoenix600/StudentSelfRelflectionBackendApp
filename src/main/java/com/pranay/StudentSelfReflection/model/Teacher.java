@@ -7,17 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-/**
- * File Name: Teacher.java
- * Entity: Teacher
- * Package: com.pranay.StudentSelfReflection.model
- * Author: pranayramteke
- * Date: 29/04/25
- * Description:
- */
 
 
 @NoArgsConstructor
@@ -37,6 +29,14 @@ public class Teacher extends Users
 	private String mobile;
 	private LocalDate dob;
 	
-	@OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER , cascade = CascadeType.PERSIST )
-	Set<Course> courses;
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name = "teacher_course",
+			joinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "teacherId"),
+			inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "courseId")
+	)
+	private Set<Course> courses = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	private Set<Batch> batches = new HashSet<>();
 }

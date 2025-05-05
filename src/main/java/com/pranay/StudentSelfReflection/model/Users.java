@@ -21,6 +21,7 @@ public class Users
 	private String confirmPwd;
 	
 	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roles_id", referencedColumnName = "rolesId")
 	private Roles role;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)

@@ -1,9 +1,10 @@
 package com.pranay.StudentSelfReflection.model;
 
-import com.pranay.StudentSelfReflection.constants.AttendanceStatus;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import com.pranay.StudentSelfReflection.constants.AttendanceStatus;
 import java.time.LocalDate;
+import java.util.Set;
 
 /**
  * File Name: Attendance.java
@@ -25,7 +26,9 @@ public class Attendance extends BaseEntity
 	@Enumerated(EnumType.STRING)
 	private AttendanceStatus status;
 	
-	@ManyToOne
-	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
+	@ManyToOne(fetch = FetchType.EAGER,optional = true,cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "student_id", referencedColumnName = "studentId",nullable = true)
 	private StudentUser studentUser;
+	
+
 }

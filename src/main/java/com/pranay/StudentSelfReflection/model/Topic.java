@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * File Name: Topic.java
  * Entity: Topic
@@ -33,10 +36,9 @@ public class Topic extends BaseEntity
 	@Enumerated(EnumType.STRING)
 	private TopicStatus eTopicStatus;
 	
-	@ManyToOne
-	@JoinColumn(
-		name = "course_id",
-		referencedColumnName = "courseId"
-	)
+	// Many Topics Can Belong To One Course
+	@ManyToOne(optional = false,fetch = FetchType.EAGER)
+	@JoinColumn(name = "course_id", referencedColumnName = "courseId")
 	private Course course;
+	
 }

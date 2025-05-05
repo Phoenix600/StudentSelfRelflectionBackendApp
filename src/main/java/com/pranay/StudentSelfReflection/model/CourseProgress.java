@@ -1,13 +1,13 @@
 package com.pranay.StudentSelfReflection.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * File Name: CourseProgress.java
@@ -29,5 +29,11 @@ public class CourseProgress extends BaseEntity
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long courseProgressId;
 	
+	private String remarks;
 	
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
+	private StudentUser studentUser;
+	
+
 }

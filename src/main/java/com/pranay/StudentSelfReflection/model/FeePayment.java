@@ -43,6 +43,10 @@ public class FeePayment extends BaseEntity
 	
 	private LocalDate paymentDate;
 	
+	private Byte transactionId;
+	
+	private Byte nTransactions;
+	
 	@Enumerated(EnumType.STRING)
 	private ModeOfPayment eModeOfPayment;
 	
@@ -55,8 +59,8 @@ public class FeePayment extends BaseEntity
 	
 	private String remarks;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
 	private StudentUser studentUser;
-	
+
 }
