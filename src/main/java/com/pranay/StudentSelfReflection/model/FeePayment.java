@@ -54,9 +54,5 @@ public class FeePayment extends BaseEntity
 	private Integer nAssignedInstallmentNumber;
 	
 	private String remarks;
-	
-	@ManyToOne
-	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
-	private StudentUser studentUser;
-	
+
 }

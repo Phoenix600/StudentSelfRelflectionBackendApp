@@ -25,13 +25,5 @@ public class StudentUser extends Users
 	private String rollNumber;
 	
 	private LocalDate dateOfBirth;
-	
-	@OneToMany(mappedBy = "studentUser")
-	private Set<Attendance> attendances;
-	
-	@OneToMany(mappedBy = "studentUser")
-	private Set<FeePayment> feePayments;
-	
-	@ManyToMany
-	private Set<Course> courses;
+
 }
