@@ -35,5 +35,9 @@ public class CourseProgress extends BaseEntity
 	@JoinColumn(name = "student_id", referencedColumnName = "studentId")
 	private StudentUser studentUser;
 	
-
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST,optional = true)
+	@JoinColumn(name =  "course_id", referencedColumnName = "courseId")
+	private Course course;
+	
 }

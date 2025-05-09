@@ -1,5 +1,7 @@
 package com.pranay.StudentSelfReflection.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * File Name: StudentController.java
  * Entity: StudentController
@@ -9,5 +11,8 @@ package com.pranay.StudentSelfReflection.controller;
  * Description:
  */
 
-public class StudentController {
+@RestController("/api/v1/student/")
+public class StudentController
+{
+
 }

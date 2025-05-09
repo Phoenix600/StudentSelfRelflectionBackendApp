@@ -23,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AdminUser extends Users{
+public class AdminUser extends Users {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

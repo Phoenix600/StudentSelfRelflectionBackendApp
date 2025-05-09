@@ -1,5 +1,8 @@
 package com.pranay.StudentSelfReflection.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * File Name: AdminController.java
  * Entity: AdminController
@@ -9,5 +12,9 @@ package com.pranay.StudentSelfReflection.controller;
  * Description:
  */
 
-public class AdminController {
+@RestController
+@RequestMapping("/api/v1/admin/")
+public class AdminController
+{
+
 }

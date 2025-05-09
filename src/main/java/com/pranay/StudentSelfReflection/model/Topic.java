@@ -30,6 +30,8 @@ public class Topic extends BaseEntity
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long topicId;
 	
+	private String topicOrder;
+	
 	private String title;
 	private String description;
 	

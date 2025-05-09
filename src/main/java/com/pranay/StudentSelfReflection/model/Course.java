@@ -42,5 +42,8 @@ public class Course extends BaseEntity
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	private Set<Teacher> teachers = new HashSet<>();
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private CourseProgress courseProgress;
 
 }
