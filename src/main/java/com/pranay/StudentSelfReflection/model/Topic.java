@@ -1,5 +1,6 @@
 package com.pranay.StudentSelfReflection.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pranay.StudentSelfReflection.constants.TopicStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,8 @@ public class Topic extends BaseEntity
 	
 	@Enumerated(EnumType.STRING)
 	private TopicStatus eTopicStatus;
-	
+
+	@JsonIgnore
 	// Many Topics Can Belong To One Course
 	@ManyToOne(optional = false,fetch = FetchType.EAGER)
 	@JoinColumn(name = "course_id", referencedColumnName = "courseId")

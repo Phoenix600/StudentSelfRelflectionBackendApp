@@ -30,20 +30,20 @@ public class CourseService
 		// TimeStamp Before The Actual Operation  (@Before)
 		Instant startTime = Instant.now();
 		System.out.println("saveCourse() method started at : " + startTime);
-		
-		// Actual Operation (@Around)
-		Course savedCourse =  courseRepository.save(course);
-		
-		Set<Topic> topics =  savedCourse.getTopics();
+
+		Set<Topic> topics =  course.getTopics();
 		for(Topic x: topics)
 		{
-			x.setCourse(savedCourse);
+			x.setCourse(course);
 		}
-		
+
+		// Actual Operation (@Around)
+		Course savedCourse =  courseRepository.save(course);
+
 		// TimeStamp After The Actual Operation (@After)
 		Instant endTime = Instant.now(); // 35 ms
 		System.out.println("saveCourse() method finished at : " + endTime);
-		System.out.println("saveCousre() method time elapsed : " + Duration.between(startTime, endTime));
+		System.out.println("saveCourse() method time elapsed : " + Duration.between(startTime, endTime));
 		
 		return savedCourse;
 		
