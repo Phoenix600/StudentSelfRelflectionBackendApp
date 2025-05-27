@@ -3,11 +3,13 @@ package com.pranay.StudentSelfReflection.services;
 import com.pranay.StudentSelfReflection.model.Course;
 import com.pranay.StudentSelfReflection.model.Topic;
 import com.pranay.StudentSelfReflection.repository.CourseRepository;
+import com.pranay.StudentSelfReflection.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,6 +27,9 @@ public class CourseService
 {
 	@Autowired
 	CourseRepository courseRepository;
+	
+	@Autowired
+	TopicRepository topicRepository;
 	
 	public Course saveCourse(Course course)
 	{
@@ -77,7 +82,14 @@ public class CourseService
 				String courseDescription = course.getDescription();
 				fetchedCourse.setDescription(courseDescription);
 			}
-
+			
+			if(!(course.getDurationInMonths() >= 0))
+			{
+				Integer courseDurationInMonths = course.getDurationInMonths();
+				fetchedCourse.setDurationInMonths(courseDurationInMonths);
+			}
+			
+			
 			upadtedCourse =  courseRepository.save(fetchedCourse);
 
 		}
@@ -135,5 +147,46 @@ public class CourseService
 		System.out.println("updateCourseTopicByTopicId() method time elapsed : " + Duration.between(startTime, endTime));
 
 		return updatedTopicsCourse;
+	}
+	
+	public String deleteCourseByCourseId(Long courseId)
+	{
+		String status = "Unable To Locate Course";
+		Optional<Course> courseOptional = courseRepository.findById(courseId);
+		
+		if(courseOptional.isPresent())
+		{
+			Course courseFromDb = courseOptional.get();
+			Set<Topic> topics =  courseFromDb.getTopics();
+			
+			try{
+				for(Topic topic : topics)
+				{
+					topic.setCourse(null);
+					topicRepository.delete(topic);
+				}
+				
+				courseRepository.delete(courseFromDb);
+				
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			
+			status = "Course Deleted Successfully";
+			
+		}
+		
+		return status;
+	}
+	
+	public Course addTopicToExistingCourseWithCourseId(Long courseId, Topic topic)
+	{
+		Course fetchedCourseFromDB = courseRepository.findById(courseId).get();
+		Set<Topic> topics = fetchedCourseFromDB.getTopics();
+		topic.setCourse(fetchedCourseFromDB);
+		topic =  topicRepository.save(topic);
+		topics.add(topic);
+		fetchedCourseFromDB =  courseRepository.save(fetchedCourseFromDB);
+		return fetchedCourseFromDB;
 	}
 }

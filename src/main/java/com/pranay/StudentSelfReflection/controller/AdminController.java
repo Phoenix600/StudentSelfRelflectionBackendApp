@@ -48,4 +48,20 @@ public class AdminController
 		Course courseResponse = courseService.updateCourseTopicByTopicId(courseId, topicId, topic);
 		return new ResponseEntity<Course>(courseResponse, HttpStatus.OK);
 	}
+	
+	// DELETE http://localhost:8080/api/v1/admin/delete-course?courseId={id}
+	@DeleteMapping("/delete-course")
+	public ResponseEntity<String> deleteCourseById(@RequestParam Long courseId)
+	{
+		String response = courseService.deleteCourseByCourseId(courseId);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+	
+	// POST http://localhost:8080/api/v1/admin/add-topic?courseId={id}
+	@PostMapping("add-topic")
+	public ResponseEntity<Course> addTopicToCourseWithCourseId(@RequestParam Long courseId, @RequestBody Topic topic)
+	{
+		Course updatedCourseWithTopics = courseService.addTopicToExistingCourseWithCourseId(courseId,topic);
+		return new ResponseEntity<>(updatedCourseWithTopics,HttpStatus.OK);
+	}
 }
