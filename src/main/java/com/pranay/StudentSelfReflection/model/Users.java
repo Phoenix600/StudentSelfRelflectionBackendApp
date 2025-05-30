@@ -20,8 +20,8 @@ public class Users
 	@Transient
 	private String confirmPwd;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "roles_id", referencedColumnName = "rolesId")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "roles_id", referencedColumnName = "rolesId",unique = false)
 	private Roles role;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)

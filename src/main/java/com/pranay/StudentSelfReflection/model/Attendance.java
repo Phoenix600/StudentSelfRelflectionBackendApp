@@ -29,6 +29,5 @@ public class Attendance extends BaseEntity
 	@ManyToOne(fetch = FetchType.EAGER,optional = true,cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "student_id", referencedColumnName = "studentId",nullable = true)
 	private StudentUser studentUser;
-	
 
 }
